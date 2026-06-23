@@ -1,0 +1,18 @@
+{
+  "name": "Century Champions",
+  "short_name": "Champions",
+  "description": "Century Steels contractor rewards — a treasure hunt to your next reward.",
+  "start_url": "/champion",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

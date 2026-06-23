@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Make number/serial inputs feel app-like */
+input,
+button {
+  font-family: inherit;
+}
+
+@layer components {
+  .input {
+    @apply w-full rounded-xl border border-steel-100 px-4 py-2.5 focus:border-champion focus:outline-none;
+  }
+}
