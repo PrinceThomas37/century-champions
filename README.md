@@ -61,6 +61,31 @@ watch progress climb and a chest open.
 
 ---
 
+## Tests
+
+```bash
+npm test
+```
+
+Unit tests (serial/phone normalization & validation) run with no setup.
+
+The integration tests exercise the core domain logic in `src/lib/champions.ts`
+and `src/lib/otp.ts` (serial redemption, anti-fraud guards, chest opening,
+forward-looking progress, OTP issue/verify) against a real Postgres database.
+They are **skipped automatically** unless `TEST_DATABASE_URL` points at a
+throwaway database (the suite truncates all tables between tests, so never point
+this at real data):
+
+```bash
+# Example: a local Postgres
+TEST_DATABASE_URL="postgresql://user:pass@localhost:5432/cc_test" npm test
+```
+
+The test harness pushes the Prisma schema to that database automatically before
+the suite runs.
+
+---
+
 ## How the treasure hunt works
 
 1. A contractor buys ~6 packets of Century Steel product.
