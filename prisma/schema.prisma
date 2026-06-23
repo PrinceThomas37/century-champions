@@ -1,0 +1,142 @@
+// Century Champions — data model
+//
+// Provider is SQLite for zero-setup local development. To migrate to Supabase/Postgres:
+//   1. Change provider below to "postgresql"
+//   2. Set DATABASE_URL to your Supabase connection string
+//   3. Run `npx prisma migrate dev`
+//
+// Note: status fields are modelled as String (with documented allowed values) rather than
+// Prisma enums so the same schema works on SQLite and Postgres without changes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// A product line (SKU). points_per_packet lets premium products count for more
+// toward treasure chests without changing the core "X more to go" UX.
+model Product {
+  id              String   @id @default(cuid())
+  sku             String   @unique
+  name            String
+  category        String? // e.g. "rivet", "bolt", "false-ceiling-connector"
+  pointsPerPacket Int      @default(1)
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  batches Batch[]
+  serials Serial[]
+}
+
+// A production/packaging batch. Serials are imported per batch from the factory.
+model Batch {
+  id        String   @id @default(cuid())
+  code      String   @unique // human-friendly batch label, e.g. "2026-06-A"
+  productId String
+  quantity  Int      @default(0)
+  voided    Boolean  @default(false) // void the whole batch if its serial list leaks
+  createdAt DateTime @default(now())
+
+  product Product  @relation(fields: [productId], references: [id])
+  serials Serial[]
+}
+
+// One serial = one packet = one redemption.
+// status: "unused" | "redeemed" | "void"
+model Serial {
+  id         String    @id @default(cuid())
+  code       String    @unique // the alphanumeric serial printed on the packet
+  productId  String
+  batchId    String
+  status     String    @default("unused")
+  redeemedBy String? // Contractor.id
+  redeemedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  product    Product      @relation(fields: [productId], references: [id])
+  batch      Batch        @relation(fields: [batchId], references: [id])
+  contractor Contractor?  @relation(fields: [redeemedBy], references: [id])
+  redemption Redemption?
+
+  @@index([status])
+}
+
+// A contractor — the champion. lifetimePoints drives chest progress.
+model Contractor {
+  id             String   @id @default(cuid())
+  phone          String   @unique
+  name           String?
+  business       String?
+  region         String? // e.g. "Kerala", "Tamil Nadu"
+  lifetimePoints Int      @default(0)
+  lifetimePackets Int     @default(0)
+  approved       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+
+  serials     Serial[]
+  redemptions Redemption[]
+  chestOpens  ChestOpen[]
+}
+
+// Audit log: every successful serial redemption.
+model Redemption {
+  id           String   @id @default(cuid())
+  serialId     String   @unique
+  contractorId String
+  pointsEarned Int      @default(1)
+  createdAt    DateTime @default(now())
+
+  serial     Serial     @relation(fields: [serialId], references: [id])
+  contractor Contractor @relation(fields: [contractorId], references: [id])
+
+  @@index([contractorId])
+}
+
+// A treasure chest milestone, defined by admin.
+// thresholdPoints is cumulative lifetime points required to unlock this chest.
+// rewardType: "discount" | "gift" | "cashback" | "custom"
+model ChestTier {
+  id              String   @id @default(cuid())
+  displayName     String // adventure name, e.g. "Bronze Chest"
+  thresholdPoints Int // cumulative lifetime points to unlock
+  rewardType      String   @default("discount")
+  rewardValue     String // e.g. "₹500 off", "Cordless drill"
+  sortOrder       Int      @default(0)
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  opens ChestOpen[]
+}
+
+// Records when a contractor unlocks a chest and tracks reward fulfilment.
+// claimStatus: "unclaimed" | "claimed"
+model ChestOpen {
+  id           String    @id @default(cuid())
+  contractorId String
+  chestTierId  String
+  couponCode   String    @unique
+  claimStatus  String    @default("unclaimed")
+  claimedAt    DateTime?
+  openedAt     DateTime  @default(now())
+
+  contractor Contractor @relation(fields: [contractorId], references: [id])
+  chestTier  ChestTier  @relation(fields: [chestTierId], references: [id])
+
+  @@unique([contractorId, chestTierId])
+}
+
+// One-time password records for phone login.
+model OtpToken {
+  id        String   @id @default(cuid())
+  phone     String
+  code      String
+  expiresAt DateTime
+  consumed  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([phone])
+}
