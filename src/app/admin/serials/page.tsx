@@ -7,17 +7,19 @@ export const dynamic = "force-dynamic";
 
 export default async function SerialsPage() {
   requireAdmin();
-  const [products, batches] = await Promise.all([
-    prisma.product.findMany({ where: { active: true }, orderBy: { name: "asc" } }),
-    prisma.batch.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        product: true,
-        _count: { select: { serials: true } },
-        serials: { where: { status: "redeemed" }, select: { id: true } },
-      },
-    }),
-  ]);
+  // Sequential queries — the Supabase pooler can choke on parallel bursts.
+  const products = await prisma.product.findMany({
+    where: { active: true },
+    orderBy: { name: "asc" },
+  });
+  const batches = await prisma.batch.findMany({
+    orderBy: { createdAt: "desc" },
+    include: {
+      product: true,
+      _count: { select: { serials: true } },
+      serials: { where: { status: "redeemed" }, select: { id: true } },
+    },
+  });
 
   return (
     <AdminShell active="/admin/serials" title="Serials">
