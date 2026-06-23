@@ -1,20 +1,23 @@
 // Century Champions — data model
 //
-// Provider is SQLite for zero-setup local development. To migrate to Supabase/Postgres:
-//   1. Change provider below to "postgresql"
-//   2. Set DATABASE_URL to your Supabase connection string
-//   3. Run `npx prisma migrate dev`
+// Database: Supabase Postgres. Set DATABASE_URL (pooled, port 6543) and DIRECT_URL
+// (direct, port 5432) in your environment — see .env.example.
 //
-// Note: status fields are modelled as String (with documented allowed values) rather than
-// Prisma enums so the same schema works on SQLite and Postgres without changes.
+// Note: status fields are modelled as String (with documented allowed values) rather
+// than Prisma enums, keeping the schema simple and portable.
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // "native" for local dev; "rhel-openssl-3.0.x" for Vercel's Linux runtime.
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  // Pooled connection (Supabase Supavisor, port 6543) — used by the app at runtime.
+  url       = env("DATABASE_URL")
+  // Direct connection (port 5432) — used for migrations only.
+  directUrl = env("DIRECT_URL")
 }
 
 // A product line (SKU). points_per_packet lets premium products count for more

@@ -101,19 +101,18 @@ If a serial list ever leaks, **void the batch** to invalidate its unused codes.
 
 ---
 
-## Going to production
+## Deploying / going to production
 
-The MVP runs on SQLite and a mock OTP so you can validate the idea immediately. The
-production path (all incremental):
+The app is wired for **Supabase Postgres + Vercel**. A dedicated Supabase project is already
+provisioned and seeded — follow **[`docs/deploy.md`](docs/deploy.md)** to connect the
+connection string and ship it to a public URL.
 
-1. **Database → Supabase/Postgres:** change the `datasource` provider in
-   `prisma/schema.prisma` to `postgresql`, point `DATABASE_URL` at Supabase, run
-   `npx prisma migrate deploy`.
-2. **Real OTP:** wire an SMS gateway (MSG91 / Twilio) in `src/lib/otp.ts` and set
+Remaining hardening, all incremental:
+
+1. **Real OTP:** wire an SMS gateway (MSG91 / Twilio) in `src/lib/otp.ts` and set
    `DEV_OTP_MODE=false`.
-3. **Hosting:** deploy to Vercel; set the env vars in the dashboard.
-4. **Admin accounts:** replace the shared admin password with proper staff logins.
-5. **Phase 2 — barcode/QR scan:** add a camera scanner to the entry screen once Century
+2. **Admin accounts:** replace the shared admin password with proper staff logins.
+3. **Phase 2 — barcode/QR scan:** add a camera scanner to the entry screen once Century
    Steels decides on inline-printed barcodes vs. stickers
    (see [`docs/printer-barcode-audit.md`](docs/printer-barcode-audit.md)).
 
