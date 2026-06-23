@@ -84,6 +84,9 @@ TEST_DATABASE_URL="postgresql://user:pass@localhost:5432/cc_test" npm test
 The test harness pushes the Prisma schema to that database automatically before
 the suite runs.
 
+**CI:** every push and pull request runs the full suite (with a Postgres service)
+plus a production build via GitHub Actions — see `.github/workflows/ci.yml`.
+
 ---
 
 ## How the treasure hunt works
