@@ -20,13 +20,13 @@ export default async function JourneyPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-md bg-steel-50 pb-24">
-      <header className="flex items-center justify-between bg-ink px-5 py-4">
-        <Link href="/champion" className="text-sm font-semibold text-white/80">
+      <header className="flex items-center justify-between border-b border-steel-200 bg-white px-5 py-4">
+        <Link href="/champion" className="text-sm font-semibold text-steel-600">
           ← Back
         </Link>
-        <h1 className="text-sm font-bold uppercase tracking-wide text-white">Activity</h1>
+        <h1 className="text-sm font-bold uppercase tracking-wide text-ink">Activity</h1>
         <form action="/api/auth/logout" method="post">
-          <button className="text-xs font-semibold uppercase tracking-wide text-white/60">
+          <button className="text-xs font-semibold uppercase tracking-wide text-steel-500">
             Log out
           </button>
         </form>

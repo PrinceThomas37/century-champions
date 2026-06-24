@@ -58,21 +58,19 @@ export default function LoginPage() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col bg-steel-50">
-      {/* Brand header band */}
-      <div className="bg-ink px-6 pb-10 pt-10 text-center">
+      {/* Brand header */}
+      <div className="border-b border-steel-200 bg-white px-6 pb-8 pt-10 text-center">
         <div className="flex justify-center">
-          <Logo size={44} variant="light" />
+          <Logo size={40} />
         </div>
-        <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-century-red">
-          Champions Rewards
-        </p>
-        <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-white">
+        <p className="mt-6 eyebrow">Champions Rewards</p>
+        <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-ink">
           Rewards for contractors
         </h1>
-        <p className="mt-1 text-sm text-white/60">Earn points on every purchase. Unlock rewards.</p>
+        <p className="mt-1 text-sm text-steel-500">Earn points on every purchase. Unlock rewards.</p>
       </div>
 
-      <div className="-mt-6 px-6">
+      <div className="px-6 pt-6">
         <div className="rounded-2xl border border-steel-200 bg-white p-6 shadow-card">
           {step === "phone" ? (
             <form onSubmit={requestOtp} className="space-y-4">
