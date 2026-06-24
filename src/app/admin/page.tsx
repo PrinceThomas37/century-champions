@@ -8,7 +8,7 @@ function Stat({ label, value, accent }: { label: string; value: number | string;
   return (
     <div className="rounded-2xl bg-white p-5 shadow-sm">
       <p className="text-sm text-steel-700/70">{label}</p>
-      <p className={`mt-1 text-3xl font-extrabold ${accent ? "text-champion" : ""}`}>{value}</p>
+      <p className={`mt-1 text-3xl font-extrabold ${accent ? "text-century-red" : "text-ink"}`}>{value}</p>
     </div>
   );
 }

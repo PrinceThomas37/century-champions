@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Logo } from "@/components/Logo";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -31,22 +32,22 @@ export default function AdminLogin() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-steel-100 px-6">
-      <form onSubmit={submit} className="w-full max-w-sm rounded-2xl bg-white p-8 shadow">
-        <h1 className="text-xl font-bold">Century Champions — Admin</h1>
-        <p className="mt-1 text-sm text-steel-700/70">Staff dashboard</p>
+    <main className="flex min-h-screen items-center justify-center bg-ink px-6">
+      <form onSubmit={submit} className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-card">
+        <Logo size={40} variant="dark" />
+        <p className="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-century-red">
+          Champions Admin
+        </p>
+        <h1 className="mt-1 text-xl font-extrabold tracking-tight text-ink">Staff sign in</h1>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Admin password"
-          className="mt-6 w-full rounded-xl border border-steel-100 px-4 py-3 focus:border-champion focus:outline-none"
+          className="input mt-6"
         />
-        {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
-        <button
-          disabled={loading}
-          className="mt-4 w-full rounded-xl bg-steel-900 py-3 font-bold text-white disabled:opacity-60"
-        >
+        {error && <p className="mt-2 text-sm text-century-red">{error}</p>}
+        <button disabled={loading} className="btn-dark mt-4 w-full">
           {loading ? "Signing in…" : "Sign in"}
         </button>
       </form>

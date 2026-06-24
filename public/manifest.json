@@ -4,8 +4,8 @@
   "description": "Century Steels contractor rewards — a treasure hunt to your next reward.",
   "start_url": "/champion",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#111315",
+  "theme_color": "#111315",
   "orientation": "portrait",
   "icons": [
     {

@@ -55,14 +55,14 @@ export default async function RedemptionsPage() {
                     {o.claimStatus === "claimed" ? (
                       <span className="text-steel-700/60">Claimed</span>
                     ) : (
-                      <span className="font-semibold text-treasure-deep">Ready</span>
+                      <span className="font-semibold text-century-red">Ready</span>
                     )}
                   </td>
                   <td className="px-4 py-3 text-right">
                     {o.claimStatus !== "claimed" && (
                       <form action={markCouponClaimed}>
                         <input type="hidden" name="id" value={o.id} />
-                        <button className="rounded-lg bg-champion px-3 py-1.5 text-xs font-bold text-white">
+                        <button className="rounded-lg bg-century-red px-3 py-1.5 text-xs font-bold text-white">
                           Mark claimed
                         </button>
                       </form>

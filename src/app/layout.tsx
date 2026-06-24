@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Century Champions",
-  description: "Century Steels contractor rewards — a treasure hunt to your next reward.",
+  description: "Century Steel Profiles contractor rewards programme.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#111315",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-steel-50 text-steel-900 antialiased">{children}</body>
+      <body className="min-h-screen bg-steel-50 text-ink antialiased">{children}</body>
     </html>
   );
 }

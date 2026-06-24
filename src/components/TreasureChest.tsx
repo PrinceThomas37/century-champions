@@ -1,4 +1,5 @@
-// Treasure chest visual. `open` swaps to the open-lid state with a glow.
+// Industrial reward "vault" — a steel strongbox in Century brand colours.
+// Replaces the gold treasure chest with an on-brand, corporate look.
 export function TreasureChest({ open = false, size = 160 }: { open?: boolean; size?: number }) {
   return (
     <div
@@ -7,41 +8,54 @@ export function TreasureChest({ open = false, size = 160 }: { open?: boolean; si
     >
       {open && (
         <div
-          className="absolute inset-0 animate-pulse rounded-full bg-treasure-gold/40 blur-2xl"
+          className="absolute inset-0 animate-pulse rounded-full bg-century-red/25 blur-2xl"
           aria-hidden
         />
       )}
       <svg
-        viewBox="0 0 200 170"
+        viewBox="0 0 200 180"
         width={size}
-        height={size * 0.85}
+        height={size * 0.9}
         className={open ? "animate-chest-pop" : ""}
         role="img"
-        aria-label={open ? "Open treasure chest" : "Locked treasure chest"}
+        aria-label={open ? "Reward unlocked" : "Locked reward vault"}
       >
-        {/* base */}
-        <rect x="20" y="70" width="160" height="85" rx="12" fill="#b9821a" />
-        <rect x="20" y="92" width="160" height="20" fill="#8a5f12" />
+        {/* body */}
+        <rect x="26" y="64" width="148" height="96" rx="10" fill="#24282C" />
+        <rect x="26" y="64" width="148" height="96" rx="10" fill="none" stroke="#3A3F45" strokeWidth="2" />
+        {/* steel rivets */}
+        <g fill="#525960">
+          <circle cx="40" cy="78" r="3" />
+          <circle cx="160" cy="78" r="3" />
+          <circle cx="40" cy="146" r="3" />
+          <circle cx="160" cy="146" r="3" />
+        </g>
         {/* lid */}
         {open ? (
-          <path d="M20 72 V60 C20 22 56 4 100 4 C144 4 180 22 180 60 V72 Z" fill="#f4b740" transform="rotate(-18 30 72)" />
+          <g transform="rotate(-20 34 64)">
+            <rect x="22" y="40" width="156" height="30" rx="8" fill="#E11B22" />
+            <rect x="22" y="40" width="156" height="30" rx="8" fill="none" stroke="#B0141A" strokeWidth="2" />
+          </g>
         ) : (
-          <path d="M20 78 V62 C20 28 56 10 100 10 C144 10 180 28 180 62 V78 Z" fill="#f4b740" />
-        )}
-        {/* lock */}
-        {!open && (
           <>
-            <rect x="86" y="66" width="28" height="40" rx="6" fill="#f4b740" />
-            <circle cx="100" cy="86" r="9" fill="#0f172a" />
-            <rect x="96" y="86" width="8" height="16" rx="3" fill="#0f172a" />
+            <rect x="22" y="48" width="156" height="26" rx="8" fill="#E11B22" />
+            <rect x="22" y="48" width="156" height="26" rx="8" fill="none" stroke="#B0141A" strokeWidth="2" />
           </>
         )}
-        {/* sparkles when open */}
+        {/* lock plate */}
+        {!open && (
+          <>
+            <rect x="86" y="92" width="28" height="34" rx="5" fill="#E11B22" />
+            <circle cx="100" cy="106" r="7" fill="#111315" />
+            <rect x="97" y="106" width="6" height="13" rx="3" fill="#111315" />
+          </>
+        )}
+        {/* spark lines when open */}
         {open && (
-          <g fill="#fff7e0">
-            <circle cx="60" cy="40" r="3" />
-            <circle cx="140" cy="34" r="4" />
-            <circle cx="100" cy="24" r="3" />
+          <g stroke="#E11B22" strokeWidth="3" strokeLinecap="round">
+            <line x1="100" y1="18" x2="100" y2="32" />
+            <line x1="64" y1="28" x2="72" y2="40" />
+            <line x1="136" y1="28" x2="128" y2="40" />
           </g>
         )}
       </svg>
