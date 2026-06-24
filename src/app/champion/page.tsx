@@ -25,11 +25,11 @@ export default async function ChampionHome() {
   return (
     <main className="mx-auto min-h-screen max-w-md bg-steel-50 pb-24">
       {/* Top bar */}
-      <header className="flex items-center justify-between bg-ink px-5 py-4">
-        <Logo size={34} variant="light" />
+      <header className="flex items-center justify-between border-b border-steel-200 bg-white px-5 py-4">
+        <Logo size={30} />
         <Link
           href="/champion/wallet"
-          className="relative rounded-md border border-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white"
+          className="relative rounded-md border border-steel-200 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-ink"
         >
           Rewards
           {unclaimed > 0 && (

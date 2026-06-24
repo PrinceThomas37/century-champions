@@ -18,11 +18,11 @@ export default async function WalletPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-md bg-steel-50 pb-24">
-      <header className="flex items-center justify-between bg-ink px-5 py-4">
-        <Link href="/champion" className="text-sm font-semibold text-white/80">
+      <header className="flex items-center justify-between border-b border-steel-200 bg-white px-5 py-4">
+        <Link href="/champion" className="text-sm font-semibold text-steel-600">
           ← Back
         </Link>
-        <h1 className="text-sm font-bold uppercase tracking-wide text-white">My Rewards</h1>
+        <h1 className="text-sm font-bold uppercase tracking-wide text-ink">My Rewards</h1>
         <span className="w-12" />
       </header>
 

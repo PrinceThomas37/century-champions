@@ -21,16 +21,16 @@ export function AdminShell({
 }) {
   return (
     <div className="min-h-screen bg-steel-50 text-ink">
-      <header className="bg-ink">
+      <header className="border-b border-steel-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
-            <Logo size={32} variant="light" />
+            <Logo size={30} />
             <span className="hidden text-xs font-bold uppercase tracking-[0.2em] text-century-red sm:block">
               Champions Admin
             </span>
           </div>
           <form action="/api/admin/logout" method="post">
-            <button className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white/80">
+            <button className="rounded-md border border-steel-200 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-steel-600">
               Log out
             </button>
           </form>
@@ -43,7 +43,7 @@ export function AdminShell({
               className={`whitespace-nowrap rounded-md px-3 py-1.5 font-semibold transition ${
                 n.href === active
                   ? "bg-century-red text-white"
-                  : "text-white/60 hover:bg-white/10 hover:text-white"
+                  : "text-steel-500 hover:bg-steel-100 hover:text-ink"
               }`}
             >
               {n.label}
