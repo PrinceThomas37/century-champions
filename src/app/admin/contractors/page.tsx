@@ -41,7 +41,7 @@ export default async function ContractorsPage() {
                   <td className="px-4 py-3 font-mono">{c.phone}</td>
                   <td className="px-4 py-3">{c.region || "—"}</td>
                   <td className="px-4 py-3">{c.lifetimePackets}</td>
-                  <td className="px-4 py-3 font-semibold text-champion">{c.lifetimePoints}</td>
+                  <td className="px-4 py-3 font-semibold text-century-red">{c.lifetimePoints}</td>
                   <td className="px-4 py-3">{c._count.chestOpens}</td>
                 </tr>
               ))

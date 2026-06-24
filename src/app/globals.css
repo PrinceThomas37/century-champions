@@ -16,14 +16,35 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Make number/serial inputs feel app-like */
 input,
-button {
+button,
+select,
+textarea {
   font-family: inherit;
 }
 
 @layer components {
   .input {
-    @apply w-full rounded-xl border border-steel-100 px-4 py-2.5 focus:border-champion focus:outline-none;
+    @apply w-full rounded-lg border border-steel-200 bg-white px-4 py-2.5 text-ink
+           placeholder:text-steel-400 focus:border-century-red focus:outline-none
+           focus:ring-2 focus:ring-century-red/20;
+  }
+
+  /* Primary industrial button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-century-red px-5 py-3
+           font-bold uppercase tracking-wide text-white transition
+           hover:bg-century-redDark active:scale-[0.99] disabled:opacity-50;
+  }
+
+  .btn-dark {
+    @apply inline-flex items-center justify-center rounded-lg bg-ink px-5 py-3
+           font-semibold text-white transition hover:bg-ink-700 active:scale-[0.99]
+           disabled:opacity-50;
+  }
+
+  /* Section label — small uppercase industrial caption */
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-century-red;
   }
 }

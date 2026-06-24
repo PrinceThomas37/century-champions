@@ -1,13 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#0f172a"/>
-  <!-- treasure chest -->
-  <g transform="translate(106 150)">
-    <rect x="0" y="70" width="300" height="150" rx="18" fill="#b9821a"/>
-    <path d="M0 96 V88 C0 40 67 8 150 8 C233 8 300 40 300 88 V96 Z" fill="#f4b740"/>
-    <rect x="0" y="96" width="300" height="34" fill="#8a5f12"/>
-    <rect x="130" y="80" width="40" height="70" rx="8" fill="#f4b740"/>
-    <circle cx="150" cy="112" r="14" fill="#0f172a"/>
-    <rect x="143" y="112" width="14" height="26" rx="4" fill="#0f172a"/>
+  <rect width="512" height="512" rx="96" fill="#111315"/>
+  <g transform="translate(96 96) scale(5)">
+    <path d="M52 12 H20 a8 8 0 0 0 -8 8 V44 a8 8 0 0 0 8 8 H52 v-7 H22 a1 1 0 0 1 -1 -1 V22 a1 1 0 0 1 1 -1 H52 Z" fill="#E11B22"/>
+    <path d="M43 21 H29 a8 8 0 0 0 -8 8 V35 a8 8 0 0 0 8 8 H43 v-7 H31 a1 1 0 0 1 -1 -1 V31 a1 1 0 0 1 1 -1 H43 Z" fill="#B0141A"/>
   </g>
-  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#0ea5a4">CHAMPIONS</text>
 </svg>

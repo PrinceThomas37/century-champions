@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TreasureChest } from "@/components/TreasureChest";
+import { Logo } from "@/components/Logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -57,77 +57,83 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center bg-gradient-to-b from-steel-900 to-champion-dark px-6 text-white">
-      <div className="text-center">
-        <TreasureChest size={130} />
-        <p className="mt-2 text-xs uppercase tracking-widest text-white/60">Century</p>
-        <h1 className="text-3xl font-extrabold">Champions</h1>
-        <p className="mt-1 text-sm text-white/70">Start your treasure hunt</p>
+    <main className="mx-auto flex min-h-screen max-w-md flex-col bg-steel-50">
+      {/* Brand header band */}
+      <div className="bg-ink px-6 pb-10 pt-10 text-center">
+        <div className="flex justify-center">
+          <Logo size={44} variant="light" />
+        </div>
+        <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-century-red">
+          Champions Rewards
+        </p>
+        <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-white">
+          Rewards for contractors
+        </h1>
+        <p className="mt-1 text-sm text-white/60">Earn points on every purchase. Unlock rewards.</p>
       </div>
 
-      <div className="mt-8 rounded-3xl bg-white/5 p-6 ring-1 ring-white/10">
-        {step === "phone" ? (
-          <form onSubmit={requestOtp} className="space-y-4">
-            <label className="block text-sm text-white/80">
-              Your name (optional)
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Suresh"
-                className="mt-1 w-full rounded-xl bg-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-treasure-gold"
-              />
-            </label>
-            <label className="block text-sm text-white/80">
-              Mobile number
-              <input
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                inputMode="numeric"
-                placeholder="10-digit mobile number"
-                className="mt-1 w-full rounded-xl bg-white/10 px-4 py-3 text-lg tracking-wide text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-treasure-gold"
-              />
-            </label>
-            {error && <p className="text-sm text-red-300">{error}</p>}
-            <button
-              disabled={loading}
-              className="w-full rounded-xl bg-treasure-gold py-3 text-lg font-bold text-steel-900 disabled:opacity-60"
-            >
-              {loading ? "Sending…" : "Send code"}
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={verify} className="space-y-4">
-            <p className="text-sm text-white/80">
-              Enter the code sent to <span className="font-semibold">{phone}</span>
-            </p>
-            {devCode && (
-              <p className="rounded-lg bg-treasure-gold/20 px-3 py-2 text-sm text-treasure-gold">
-                Dev mode code: <span className="font-bold">{devCode}</span>
+      <div className="-mt-6 px-6">
+        <div className="rounded-2xl border border-steel-200 bg-white p-6 shadow-card">
+          {step === "phone" ? (
+            <form onSubmit={requestOtp} className="space-y-4">
+              <label className="block text-sm font-semibold text-ink">
+                Your name <span className="font-normal text-steel-400">(optional)</span>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Suresh"
+                  className="input mt-1.5"
+                />
+              </label>
+              <label className="block text-sm font-semibold text-ink">
+                Mobile number
+                <input
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  inputMode="numeric"
+                  placeholder="10-digit mobile number"
+                  className="input mt-1.5 text-lg tracking-wide"
+                />
+              </label>
+              {error && <p className="text-sm text-century-red">{error}</p>}
+              <button disabled={loading} className="btn-primary w-full">
+                {loading ? "Sending…" : "Send code"}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={verify} className="space-y-4">
+              <p className="text-sm text-steel-600">
+                Enter the code sent to <span className="font-bold text-ink">{phone}</span>
               </p>
-            )}
-            <input
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              inputMode="numeric"
-              placeholder="6-digit code"
-              className="w-full rounded-xl bg-white/10 px-4 py-3 text-center text-2xl tracking-[0.5em] text-white placeholder:tracking-normal placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-treasure-gold"
-            />
-            {error && <p className="text-sm text-red-300">{error}</p>}
-            <button
-              disabled={loading}
-              className="w-full rounded-xl bg-treasure-gold py-3 text-lg font-bold text-steel-900 disabled:opacity-60"
-            >
-              {loading ? "Verifying…" : "Enter the hunt"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setStep("phone")}
-              className="w-full text-center text-sm text-white/60"
-            >
-              ← Change number
-            </button>
-          </form>
-        )}
+              {devCode && (
+                <p className="rounded-lg bg-century-redSoft px-3 py-2 text-sm text-century-redDark">
+                  Test mode code: <span className="font-bold">{devCode}</span>
+                </p>
+              )}
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                inputMode="numeric"
+                placeholder="6-digit code"
+                className="input text-center text-2xl tracking-[0.5em] placeholder:tracking-normal"
+              />
+              {error && <p className="text-sm text-century-red">{error}</p>}
+              <button disabled={loading} className="btn-primary w-full">
+                {loading ? "Verifying…" : "Continue"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setStep("phone")}
+                className="w-full text-center text-sm font-semibold text-steel-500"
+              >
+                ← Change number
+              </button>
+            </form>
+          )}
+        </div>
+        <p className="mt-6 text-center text-xs text-steel-400">
+          Century Steel Profiles · Contractor Rewards Programme
+        </p>
       </div>
     </main>
   );
