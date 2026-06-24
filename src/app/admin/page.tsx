@@ -16,16 +16,34 @@ function Stat({ label, value, accent }: { label: string; value: number | string;
 export default async function AdminDashboard() {
   requireAdmin();
 
-  const [contractors, totalSerials, redeemed, unused, chestsOpened, unclaimed, products] =
-    await Promise.all([
-      prisma.contractor.count(),
-      prisma.serial.count(),
-      prisma.serial.count({ where: { status: "redeemed" } }),
-      prisma.serial.count({ where: { status: "unused" } }),
-      prisma.chestOpen.count(),
-      prisma.chestOpen.count({ where: { claimStatus: "unclaimed" } }),
-      prisma.product.count(),
-    ]);
+  // Query sequentially (not Promise.all): the Supabase pooler can choke on a
+  // burst of parallel queries on a single pooled connection. On any DB error,
+  // show a readable message instead of a blank crash screen.
+  let contractors: number,
+    totalSerials: number,
+    redeemed: number,
+    unused: number,
+    chestsOpened: number,
+    unclaimed: number,
+    products: number;
+  try {
+    contractors = await prisma.contractor.count();
+    totalSerials = await prisma.serial.count();
+    redeemed = await prisma.serial.count({ where: { status: "redeemed" } });
+    unused = await prisma.serial.count({ where: { status: "unused" } });
+    chestsOpened = await prisma.chestOpen.count();
+    unclaimed = await prisma.chestOpen.count({ where: { claimStatus: "unclaimed" } });
+    products = await prisma.product.count();
+  } catch (err) {
+    return (
+      <AdminShell active="/admin" title="Dashboard">
+        <div className="rounded-2xl bg-red-50 p-5 text-sm text-red-700">
+          <p className="font-bold">Couldn&apos;t load dashboard data.</p>
+          <pre className="mt-2 overflow-x-auto whitespace-pre-wrap">{String(err)}</pre>
+        </div>
+      </AdminShell>
+    );
+  }
 
   const redemptionRate = totalSerials > 0 ? Math.round((redeemed / totalSerials) * 100) : 0;
 

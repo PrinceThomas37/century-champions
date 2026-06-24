@@ -7,18 +7,17 @@ export const dynamic = "force-dynamic";
 
 export default async function RedemptionsPage() {
   requireAdmin();
-  const [opens, recent] = await Promise.all([
-    prisma.chestOpen.findMany({
-      orderBy: [{ claimStatus: "asc" }, { openedAt: "desc" }],
-      include: { chestTier: true, contractor: true },
-      take: 100,
-    }),
-    prisma.redemption.findMany({
-      orderBy: { createdAt: "desc" },
-      include: { contractor: true, serial: { include: { product: true } } },
-      take: 50,
-    }),
-  ]);
+  // Sequential queries — the Supabase pooler can choke on parallel bursts.
+  const opens = await prisma.chestOpen.findMany({
+    orderBy: [{ claimStatus: "asc" }, { openedAt: "desc" }],
+    include: { chestTier: true, contractor: true },
+    take: 100,
+  });
+  const recent = await prisma.redemption.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { contractor: true, serial: { include: { product: true } } },
+    take: 50,
+  });
 
   return (
     <AdminShell active="/admin/redemptions" title="Redemptions">
