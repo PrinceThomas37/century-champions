@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Century Champions — Go-Live Plan & Costs</title>
+<style>
+  :root { --red:#E11B22; --ink:#15171A; --steel:#5B626B; --line:#E2E6EA; --bg:#F7F8F9; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .sheet { max-width: 820px; margin: 24px auto; background:#fff; border:1px solid var(--line);
+           border-radius: 12px; overflow:hidden; }
+  header { background: var(--ink); color:#fff; padding: 26px 34px; }
+  .mark { display:flex; align-items:center; gap:12px; }
+  .bars { width:42px; height:42px; }
+  .eyebrow { color: var(--red); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { margin: 4px 0 0; font-size: 24px; letter-spacing: -.02em; }
+  header p { margin: 6px 0 0; color: rgba(255,255,255,.65); font-size: 13px; }
+  .body { padding: 14px 34px 30px; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; margin: 26px 0 6px;
+       padding-bottom: 6px; border-bottom: 2px solid var(--red); }
+  h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--steel); margin: 18px 0 6px; }
+  ol, ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 6px 0; font-size: 14px; }
+  .tag { display:inline-block; font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+         padding: 2px 7px; border-radius: 999px; margin-right: 6px; vertical-align: middle; }
+  .owner { background:#FBE9E9; color:#B0141A; }
+  .dev   { background:#EAF0F3; color:#3A4750; }
+  .both  { background:#FFF3D6; color:#8A6400; }
+  table { width:100%; border-collapse: collapse; margin: 8px 0; font-size: 13.5px; }
+  th, td { text-align:left; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  th { background: #FAFBFC; text-transform: uppercase; font-size: 11px; letter-spacing: .06em; color: var(--steel); }
+  td.amt, th.amt { text-align: right; white-space: nowrap; }
+  .total td { font-weight: 800; border-top: 2px solid var(--ink); }
+  .note { background:#FAFBFC; border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:13px; margin-top:10px; }
+  .callout { font-size: 11px; color: var(--steel); margin-top: 4px; }
+  .two { display:flex; gap:14px; flex-wrap:wrap; }
+  .two table { flex:1; min-width: 240px; }
+  footer { padding: 16px 34px; border-top:1px solid var(--line); font-size: 11px; color: var(--steel); }
+  @media print { body{background:#fff;} .sheet{border:none;margin:0;border-radius:0;} }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <div class="mark">
+      <svg class="bars" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="19" y="10" width="34" height="7" rx="3.5" fill="#B0141A"/>
+        <rect x="15" y="21" width="44" height="7" rx="3.5" fill="#B0141A"/>
+        <rect x="15" y="32" width="42" height="7" rx="3.5" fill="#B0141A"/>
+        <rect x="19" y="43" width="34" height="7" rx="3.5" fill="#B0141A"/>
+        <rect x="16" y="10" width="34" height="7" rx="3.5" fill="#E11B22"/>
+        <rect x="12" y="21" width="44" height="7" rx="3.5" fill="#E11B22"/>
+        <rect x="12" y="32" width="42" height="7" rx="3.5" fill="#E11B22"/>
+        <rect x="16" y="43" width="34" height="7" rx="3.5" fill="#E11B22"/>
+      </svg>
+      <div>
+        <div class="eyebrow">Century Steel Profiles</div>
+        <h1>Century Champions — Go-Live Plan &amp; Costs</h1>
+      </div>
+    </div>
+    <p>Contractor rewards programme · prepared for the owner · everything owned under the client's accounts</p>
+  </header>
+
+  <div class="body">
+    <p style="font-size:14px;margin-top:16px;">
+      The app is already built and running on professional cloud infrastructure. Going live means swapping
+      the test pieces for real ones and handing ownership to the client. Below is the step-by-step plan and
+      the full budget. <strong>Start with Part 1 (SMS)</strong> — it has a 1–2 day approval wait; everything
+      else can run in parallel.
+    </p>
+    <p style="font-size:12px;color:var(--steel);">
+      <span class="tag owner">Owner</span> = client does ·
+      <span class="tag dev">Dev</span> = developer does ·
+      <span class="tag both">Both</span> = quick handoff together
+    </p>
+
+    <h2>Part A — Go-Live Checklist</h2>
+
+    <h3>1 · SMS / OTP login (do first — has a waiting period)</h3>
+    <ol>
+      <li><span class="tag owner">Owner</span> Subscribe to the OTP SMS vendor.</li>
+      <li><span class="tag owner">Owner</span> Complete <strong>DLT registration</strong> (legally required in India). Register a Sender ID (e.g. <code>CENTRY</code>) and a template:
+        <div class="callout">"##otp## is your Century Champions login code. Do not share it with anyone." (variable named <code>otp</code>)</div>
+      </li>
+      <li><span class="tag owner">Owner</span> Collect from vendor: API key, Template ID, Sender ID, API docs.</li>
+      <li><span class="tag owner">Owner</span> → <span class="tag dev">Dev</span> Send those to the developer to wire in.</li>
+    </ol>
+
+    <h3>2 · Create accounts (owner's email + owner's card)</h3>
+    <ol start="5">
+      <li><span class="tag owner">Owner</span> Create a <strong>GitHub</strong> account (free).</li>
+      <li><span class="tag owner">Owner</span> Create <strong>Supabase</strong> account + organisation → upgrade to Pro, add card.</li>
+      <li><span class="tag owner">Owner</span> Create <strong>Vercel</strong> account → upgrade to Pro, add card.</li>
+    </ol>
+
+    <h3>3 · Transfer ownership to the client</h3>
+    <ol start="8">
+      <li><span class="tag both">Both</span> Transfer the <strong>code repository</strong> to the owner; add developer back as collaborator.</li>
+      <li><span class="tag both">Both</span> Move the <strong>database</strong> into the owner's account (developer migrates the data).</li>
+      <li><span class="tag both">Both</span> Move the <strong>hosting</strong> to the owner's account (developer reconnects settings).</li>
+    </ol>
+
+    <h3>4 · Domain (no new purchase)</h3>
+    <ol start="11">
+      <li><span class="tag owner">Owner</span> Add one DNS record for a subdomain like <code>rewards.centurysteelprofiles.com</code> (developer provides the exact value). Main website is unaffected.</li>
+    </ol>
+
+    <h3>5 · Real data (owner provides, developer loads)</h3>
+    <ol start="12">
+      <li><span class="tag owner">Owner</span> → <span class="tag dev">Dev</span> Product list + points per packet.</li>
+      <li><span class="tag owner">Owner</span> → <span class="tag dev">Dev</span> Reward tiers (thresholds + rewards).</li>
+      <li><span class="tag owner">Owner</span> → <span class="tag dev">Dev</span> The real serial codes printed on packets (a file).</li>
+    </ol>
+
+    <h3>6 · Launch</h3>
+    <ol start="15">
+      <li><span class="tag dev">Dev</span> Wire in real SMS, load data, rotate all secrets, point domain, switch off test mode.</li>
+      <li><span class="tag owner">Owner</span> Test on your phone — real SMS code, log in, scan a code.</li>
+      <li><span class="tag dev">Dev</span> Generate QR codes for the live link.</li>
+      <li><span class="tag owner">Owner</span> Print &amp; place QR codes at distributor counters. <strong>Live.</strong></li>
+    </ol>
+
+    <h2>Part B — Cost Sheet</h2>
+
+    <h3>One-time / setup</h3>
+    <table>
+      <tr><th>Item</th><th class="amt">Cost</th></tr>
+      <tr><td>App development</td><td class="amt">Done</td></tr>
+      <tr><td>Domain (subdomain of existing site)</td><td class="amt">₹0</td></tr>
+      <tr><td>Account setup (GitHub / Supabase / Vercel)</td><td class="amt">₹0</td></tr>
+      <tr><td>SMS DLT registration (one-time, varies by vendor)</td><td class="amt">₹0 – 6,000</td></tr>
+      <tr class="total"><td>Total setup</td><td class="amt">≈ ₹0 – 6,000</td></tr>
+    </table>
+
+    <h3>Monthly running cost</h3>
+    <table>
+      <tr><th>Item</th><th class="amt">Monthly</th></tr>
+      <tr><td>Supabase Pro — database (backups, no sleep, 8&nbsp;GB)</td><td class="amt">~₹2,100</td></tr>
+      <tr><td>Vercel Pro — hosting (commercial, auto-scaling)</td><td class="amt">~₹1,700</td></tr>
+      <tr><td>SMS — 500 OTPs × ₹0.11–0.25</td><td class="amt">~₹90</td></tr>
+      <tr><td>Domain (subdomain)</td><td class="amt">₹0</td></tr>
+      <tr class="total"><td>Total</td><td class="amt">≈ ₹3,900 / month</td></tr>
+    </table>
+
+    <h3>Two options</h3>
+    <div class="two">
+      <table>
+        <tr><th>Lean start</th><th class="amt">Monthly</th></tr>
+        <tr><td>Supabase Pro</td><td class="amt">₹2,100</td></tr>
+        <tr><td>Vercel Free *(non-commercial)*</td><td class="amt">₹0</td></tr>
+        <tr><td>SMS</td><td class="amt">~₹90</td></tr>
+        <tr class="total"><td>Total</td><td class="amt">≈ ₹2,200</td></tr>
+      </table>
+      <table>
+        <tr><th>Recommended (production)</th><th class="amt">Monthly</th></tr>
+        <tr><td>Supabase Pro</td><td class="amt">₹2,100</td></tr>
+        <tr><td>Vercel Pro</td><td class="amt">₹1,700</td></tr>
+        <tr><td>SMS</td><td class="amt">~₹90</td></tr>
+        <tr class="total"><td>Total</td><td class="amt">≈ ₹3,900</td></tr>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Key points:</strong> The bill stays flat as you grow — 500 or 5,000 logins costs almost the same.
+      No servers to manage (fully managed cloud). 8&nbsp;GB ≈ ~15 million serial codes of headroom — years of room.
+      All accounts &amp; billing in the owner's name.
+    </div>
+  </div>
+
+  <footer>
+    Figures are approximate. Supabase ($25) and Vercel ($20) bill in USD, so rupee amounts shift slightly with the
+    exchange rate; SMS is the vendor's rate. Prepared for Century Steel Profiles — Century Champions rewards programme.
+  </footer>
+</div>
+</body>
+</html>
